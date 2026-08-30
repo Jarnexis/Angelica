@@ -77,6 +77,7 @@ options.total_stars.tooltip=Щільність зірок
 options.void_fog=Туман порожнечі
 options.void_fog.tooltip=Туман порожнечі
 options.hurt_shake=Погойдування камери від шкоди
+options.hurt_shake.tooltip=Визначає, наскільки сильно нахиляється камера під час отримання шкоди.
 options.background.random=Випадково
 options.zoom_smooth=Плавне наближення
 options.zoom_smooth.tooltip=Плавно зміщує камеру до рівня наближення замість миттєвого перемикання.
