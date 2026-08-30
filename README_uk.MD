@@ -2,7 +2,7 @@
 
 <sup>**[CurseForge](https://www.curseforge.com/minecraft/mc-mods/angelica) | [Modrinth](https://modrinth.com/mod/angelica)**</sup>
 
-🌐 **Мови:** [English](README.md) | [Українська](README_uk.md)
+🌐 **Мови:** [English](README.MD) | [Українська](README_uk.MD)
 
 * Маленький Кут [sic], що підтримує шейдери, водночас рятуючи ваші FPS від вірної смерті — boubou
 * Він тупий чи гострий? — Caedis
