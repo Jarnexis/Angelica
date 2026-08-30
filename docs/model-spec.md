@@ -1,4 +1,7 @@
 # A specification for models
+
+🌐 **Languages:** [English](model-spec.md) | [Українська](model-spec_uk.md)
+
 This is borrowed from [the unofficial Minecraft wiki](https://minecraft.wiki/w/Tutorials/Models) under the CC BY-NC-SA 3.0.
 
 The folder `assets/<namespace>/models/block` holds the model files for all the specified variants. The names of the files can be changed, but must always correspond with the names used in the variant files.
