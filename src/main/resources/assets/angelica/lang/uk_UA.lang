@@ -190,10 +190,14 @@ options.dynamic_lights_cull_timeout=Час до примусового онов�
 options.dynamic_lights_cull_timeout.tooltip=Максимальна кількість тактів, яку прихований чанк може чекати перед примусовою перебудовою. Менше значення = кращий відгук, але більше навантаження на відеокарту.
 options.dynamiclights.page=Динамічне освітлення
 options.dynamiclights.entities=Налаштування сутностей...
+options.dynamiclights.entities.tooltip=Виберіть типи сутностей, які випромінюватимуть динамічне світло.
 options.dynamiclights.entities.title=Динамічне освітлення — Сутностей
 options.dynamiclights.entities.info=Виберіть типи сутностей, які випромінюватимуть динамічне світло. Деякі пункти потрібні для сумісності з модами.
 options.dynamiclights.entities.search=Пошук (@mod, $on, $off)
-options.dynamiclights.entity.tooltip=Перемикнути динамічне освітлення для сутностей типу %s. Вимкніть для підвищення продуктивності, якщо цей тип сутностей створює небажане світло.
+options.dynamiclights.entities.enableall=Увімкнути всі
+options.dynamiclights.entities.disableall=Вимкнути всі
+options.dynamiclights.entities.enableshown=Увімкнути відображені
+options.dynamiclights.entities.disableshown=Вимкнути відображені
 
 options.angelica.search.no_results=Відповідних параметрів не знайдено
 options.angelica.fontconfig=Налаштування шрифтів...
