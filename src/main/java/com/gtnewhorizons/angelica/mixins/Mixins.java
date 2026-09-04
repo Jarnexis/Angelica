@@ -159,6 +159,7 @@ public enum Mixins implements IMixins {
         .setApplyIf(() -> AngelicaConfig.enableTESRChestCache)
         .addClientMixins(
             "angelica.tesr.MixinTileEntityChestRenderer",
+            "angelica.tesr.MixinTileEntityChestRenderer_BindTexture",
             "angelica.tesr.MixinTileEntityEnderChestRenderer"
         )
     ),
