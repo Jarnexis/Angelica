@@ -179,6 +179,7 @@ public final class ShaderManager {
         sm.lastFramePreDrawCalls = sm.preDrawCalls;
         sm.preDrawCalls = 0;
         sm.uniforms.endFrame();
+        FfpExtendedAttribs.endFrame();
     }
 
     public static void setCurrentNormal(float x, float y, float z) {
