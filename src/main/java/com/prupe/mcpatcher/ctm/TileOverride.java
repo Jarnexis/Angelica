@@ -33,11 +33,15 @@ public abstract class TileOverride implements Comparable<TileOverride> {
 
     private static final MCLogger logger = MCLogger.getLogger(MCLogger.Category.CONNECTED_TEXTURES, "CTM");
 
+    private static int nextRegistrationOrder;
+
     public final PropertiesFile properties;
     private final String baseFilename;
     protected final TileLoader tileLoader;
     protected final int renderPass;
     private final int weight;
+    private boolean lostScope;
+    private final int registrationOrder = nextRegistrationOrder++;
     private final List<BlockStateMatcher> matchBlocks;
     private final Set<String> matchTiles;
     private final BlockFaceMatcher faceMatcher;
@@ -274,19 +278,21 @@ public abstract class TileOverride implements Comparable<TileOverride> {
                 // nothing
             } else if (token.matches("\\d+-\\d+")) {
                 for (int id : MCPatcherUtils.parseIntegerList(token, 0, 65535)) {
-                    BlockStateMatcher matcher = BlockAPI.createMatcher(properties, id + defaultMetadata);
-                    if (matcher == null) {
-                        properties.warning("unknown block id %d", id);
+                    List<BlockStateMatcher> matchers = BlockAPI.createMatchers(properties, id + defaultMetadata);
+                    if (matchers.isEmpty()) {
+                        properties.fine("unknown block id %d", id);
+                        lostScope = true;
                     } else {
-                        blocks.add(matcher);
+                        blocks.addAll(matchers);
                     }
                 }
             } else {
-                BlockStateMatcher matcher = BlockAPI.createMatcher(properties, token + defaultMetadata);
-                if (matcher == null) {
-                    properties.warning("unknown block %s", token);
+                List<BlockStateMatcher> matchers = BlockAPI.createMatchers(properties, token + defaultMetadata);
+                if (matchers.isEmpty()) {
+                    properties.fine("unknown block %s", token);
+                    lostScope = true;
                 } else {
-                    blocks.add(matcher);
+                    blocks.addAll(matchers);
                 }
             }
         }
@@ -334,7 +340,11 @@ public abstract class TileOverride implements Comparable<TileOverride> {
     public final void registerIcons() {
         icons = new IIcon[tileNames.size()];
         for (int i = 0; i < icons.length; i++) {
-            icons[i] = tileLoader.getIcon(tileNames.get(i));
+            final ResourceLocation tileName = tileNames.get(i);
+            icons[i] = tileLoader.getIcon(tileName);
+            if (icons[i] == null && tileName != null) {
+                properties.warning("tile %s did not resolve to an icon, tile %d will not render", tileName, i);
+            }
         }
     }
 
@@ -368,11 +378,11 @@ public abstract class TileOverride implements Comparable<TileOverride> {
         if (result != 0) {
             return result;
         }
-        if (o instanceof TileOverride) {
-            return baseFilename.compareTo(((TileOverride) o).baseFilename);
-        } else {
-            return -1;
+        result = Boolean.compare(lostScope, o.lostScope);
+        if (result != 0) {
+            return result;
         }
+        return Integer.compare(registrationOrder, o.registrationOrder);
     }
 
     final boolean shouldConnect(RenderBlockState renderBlockState, IIcon icon, int relativeDirection) {
